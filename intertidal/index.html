@@ -7,9 +7,10 @@
   <link rel="icon" href="../assets/icon.png" type="image/png">
   <link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css">
   <script type="module" src="../assets/motion.js"></script>
+  <script type="module" src="../assets/workshop.js"></script>
 </head><body class="intertidal" data-study="intertidal" data-pick="0">
   <a class="skip" href="#main">Skip to content</a>
-  <header class="mast"><a class="brand" href="./" aria-label="Intertidal home">Intertidal</a><nav aria-label="Site"><a href="#explore">Field notes</a><a href="../">Motion Field</a></nav></header>
+  <header class="mast"><a class="brand" href="./" aria-label="Intertidal home">Intertidal</a><nav aria-label="Site"><a href="#tools">Tool</a><a href="#model">3D</a><a href="../">All sites</a></nav></header>
   <main id="main" class="study" tabindex="-1">
     <section class="hero" aria-label="Digital field guide"><div class="hero-copy">
   <p class="genre">Digital field guide</p>
@@ -24,12 +25,47 @@
       <div class="selection">
         <div class="choices" role="group" aria-label="Field notes"><button class="choice" type="button" data-pick="0" aria-controls="selection-details" aria-pressed="true"><span>Splash</span><b>Upper shore</b></button><button class="choice" type="button" data-pick="1" aria-controls="selection-details" aria-pressed="false"><span>Mid tide</span><b>Middle shore</b></button><button class="choice" type="button" data-pick="2" aria-controls="selection-details" aria-pressed="false"><span>Low tide</span><b>Lower shore</b></button></div>
         <div id="selection-details" class="reading" aria-live="polite" aria-atomic="true"><h3 data-detail-title>Lichen and periwinkles</h3><p data-detail-text>Splash from breaking waves moistens the rock above the usual high-water line.</p></div>
-        
-        
+
+
       </div>
-      
+
     </div>
   </section>
+    <section class="workshop" id="tools" data-workshop tabindex="-1" aria-labelledby="tool-title">
+  <div class="section-head"><h2 id="tool-title">Tide interpolation</h2><p>Use consecutive low and high tides to estimate when the water reaches a chosen fraction of the rise. This is a mathematical sketch.</p></div>
+  <div class="workshop-grid">
+    <form aria-labelledby="tool-title"><div class="tool-fields"><label for="tool-low">Low tide<input id="tool-low" type="time" name="low" value="07:15" required></label><label for="tool-high">Following high tide<input id="tool-high" type="time" name="high" value="13:35" required></label><label for="tool-rise">Fraction of the rise (%)<input id="tool-rise" type="number" name="rise" value="50" min="0" max="100" step="1" inputmode="decimal" required></label></div>
+      <button class="action" type="submit">Calculate</button>
+      <p class="tool-status" data-result-status role="status"></p>
+    </form>
+    <div class="tool-result">
+
+      <div data-results></div>
+      <button class="quiet-action" type="button" data-download>Download CSV</button>
+    </div>
+  </div>
+</section>
+<section class="model-section" id="model" data-model tabindex="-1" aria-labelledby="model-title">
+  <div class="model-heading"><div><p class="genre">3D model</p><h2 id="model-title">Rocky shore habitats</h2></div>
+    <a class="quiet-action" href="../assets/models/intertidal.glb" download>Download GLB</a></div>
+  <div class="model-media">
+    <img data-poster src="../assets/models/intertidal.webp" width="900" height="563" loading="lazy" alt="Rocky shore habitats viewed from above and to the side">
+    <div class="model-viewport" id="viewer" data-viewport hidden></div>
+  </div>
+  <div class="model-footer">
+    <button class="action" type="button" data-open-model aria-controls="viewer" aria-expanded="false">Open 3D view</button>
+    <div class="model-controls" data-model-controls aria-label="3D controls" role="group" hidden>
+      <button type="button" data-orbit="left" aria-label="Rotate left">←</button>
+      <button type="button" data-orbit="right" aria-label="Rotate right">→</button>
+      <button type="button" data-orbit="up" aria-label="Tilt up">↑</button>
+      <button type="button" data-orbit="down" aria-label="Tilt down">↓</button>
+      <button type="button" data-orbit="in" aria-label="Zoom in">+</button>
+      <button type="button" data-orbit="out" aria-label="Zoom out">−</button>
+      <button type="button" data-orbit="reset">Reset view</button>
+    </div>
+  </div>
+  <p class="tool-status" data-model-status role="status"></p>
+</section>
   </main>
   <footer class="foot"><span>Motion Field / Digital field guide concept</span><a href="../offcut/">Next study: Offcut</a></footer>
   <script type="application/json" id="study-data">[["Splash","Upper shore","Lichen and periwinkles","Splash from breaking waves moistens the rock above the usual high-water line."],["Mid tide","Middle shore","Barnacles and mussels","Shells close between tides, helping these animals retain water until the next flood."],["Low tide","Lower shore","Sea stars and kelp","The lowest pools spend more time submerged and hold water at low tide."]]</script>

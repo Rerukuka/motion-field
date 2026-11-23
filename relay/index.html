@@ -7,9 +7,10 @@
   <link rel="icon" href="../assets/icon.png" type="image/png">
   <link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css">
   <script type="module" src="../assets/motion.js"></script>
+  <script type="module" src="../assets/workshop.js"></script>
 </head><body class="relay" data-study="relay" data-pick="0">
   <a class="skip" href="#main">Skip to content</a>
-  <header class="mast"><a class="brand" href="./" aria-label="The Quiet Relay home">The Quiet Relay</a><nav aria-label="Site"><a href="#explore">Scene index</a><a href="../">Motion Field</a></nav></header>
+  <header class="mast"><a class="brand" href="./" aria-label="The Quiet Relay home">The Quiet Relay</a><nav aria-label="Site"><a href="#tools">Tool</a><a href="#model">3D</a><a href="../">All sites</a></nav></header>
   <main id="main" class="study" tabindex="-1">
     <section class="hero" aria-label="Short film"><div class="hero-copy">
   <p class="genre">Short film</p>
@@ -25,20 +26,55 @@
   <figcaption>An original science fiction short concept</figcaption>
 </figure>
     <div class="film-card" aria-hidden="true"><i></i><strong>Carrier lost</strong></div>
-    <div class="film-meter" aria-hidden="true"><span data-clock>00:00</span><div><b></b></div><span>00:09</span></div>
+    <div class="film-meter" aria-hidden="true"><span data-clock>00:00</span><div><b></b></div><span data-runtime>00:09</span></div>
   </div></section>
     <section class="workbench" id="explore" tabindex="-1" aria-labelledby="explore-title">
-    <div class="section-head"><h2 id="explore-title">Three frames from the ridge</h2><p>An imagined twelve-minute film set inside a relay station. The original title study runs for nine seconds.</p></div>
+    <div class="section-head"><h2 id="explore-title">Three frames from the ridge</h2><p>An imagined twelve-minute film set inside a relay station. The title sequence starts at nine seconds. Edit its timing in the cue sheet below.</p></div>
     <div class="bench-grid">
       <div class="selection">
         <div class="choices" role="group" aria-label="Scene index"><button class="choice" type="button" data-pick="0" aria-controls="selection-details" aria-pressed="true"><span>00:00</span><b>Carrier lost</b></button><button class="choice" type="button" data-pick="1" aria-controls="selection-details" aria-pressed="false"><span>00:03</span><b>Room four</b></button><button class="choice" type="button" data-pick="2" aria-controls="selection-details" aria-pressed="false"><span>00:06</span><b>Stand by</b></button></div>
         <div id="selection-details" class="reading" aria-live="polite" aria-atomic="true"><h3 data-detail-title>The ridge</h3><p data-detail-text>A maintenance light flickers at the only inhabited point in the valley.</p></div>
-        
+
         <button class="action" type="button" data-play aria-pressed="false">Play title sequence</button>
       </div>
       <div class="bench-print" aria-hidden="true"><span data-print-tag>00:00</span><b data-print-title>Carrier lost</b></div>
     </div>
   </section>
+    <section class="workshop" id="tools" data-workshop tabindex="-1" aria-labelledby="tool-title">
+  <div class="section-head"><h2 id="tool-title">Title cue sheet</h2><p>Set the length of each shot. Apply the timings to the title sequence and export its cue sheet.</p></div>
+  <div class="workshop-grid">
+    <form aria-labelledby="tool-title"><div class="tool-fields"><label for="tool-ridge">The ridge (seconds)<input id="tool-ridge" type="number" name="ridge" value="3" min="0.1" max="90" step="0.01" inputmode="decimal" required></label><label for="tool-station">The station (seconds)<input id="tool-station" type="number" name="station" value="3" min="0.1" max="90" step="0.01" inputmode="decimal" required></label><label for="tool-door">The door (seconds)<input id="tool-door" type="number" name="door" value="3" min="0.1" max="90" step="0.01" inputmode="decimal" required></label></div>
+      <button class="action" type="submit">Apply timings</button>
+      <p class="tool-status" data-result-status role="status"></p>
+    </form>
+    <div class="tool-result">
+
+      <div data-results></div>
+      <button class="quiet-action" type="button" data-download>Download CSV</button>
+    </div>
+  </div>
+</section>
+<section class="model-section" id="model" data-model tabindex="-1" aria-labelledby="model-title">
+  <div class="model-heading"><div><p class="genre">3D model</p><h2 id="model-title">Ridge relay antenna</h2></div>
+    <a class="quiet-action" href="../assets/models/relay.glb" download>Download GLB</a></div>
+  <div class="model-media">
+    <img data-poster src="../assets/models/relay.webp" width="900" height="563" loading="lazy" alt="Ridge relay antenna viewed from above and to the side">
+    <div class="model-viewport" id="viewer" data-viewport hidden></div>
+  </div>
+  <div class="model-footer">
+    <button class="action" type="button" data-open-model aria-controls="viewer" aria-expanded="false">Open 3D view</button>
+    <div class="model-controls" data-model-controls aria-label="3D controls" role="group" hidden>
+      <button type="button" data-orbit="left" aria-label="Rotate left">←</button>
+      <button type="button" data-orbit="right" aria-label="Rotate right">→</button>
+      <button type="button" data-orbit="up" aria-label="Tilt up">↑</button>
+      <button type="button" data-orbit="down" aria-label="Tilt down">↓</button>
+      <button type="button" data-orbit="in" aria-label="Zoom in">+</button>
+      <button type="button" data-orbit="out" aria-label="Zoom out">−</button>
+      <button type="button" data-orbit="reset">Reset view</button>
+    </div>
+  </div>
+  <p class="tool-status" data-model-status role="status"></p>
+</section>
   </main>
   <footer class="foot"><span>Motion Field / Short film concept</span><a href="../scree/">Next study: Scree</a></footer>
   <script type="application/json" id="study-data">[["00:00","Carrier lost","The ridge","A maintenance light flickers at the only inhabited point in the valley."],["00:03","Room four","The station","The return signal names an extra room, absent from the plan."],["00:06","Stand by","The door","A stripe of orange light leaks from beneath a door in the snow."]]</script>

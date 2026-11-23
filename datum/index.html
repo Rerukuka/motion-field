@@ -7,9 +7,10 @@
   <link rel="icon" href="../assets/icon.png" type="image/png">
   <link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css">
   <script type="module" src="../assets/motion.js"></script>
+  <script type="module" src="../assets/workshop.js"></script>
 </head><body class="datum" data-study="datum" data-pick="0">
   <a class="skip" href="#main">Skip to content</a>
-  <header class="mast"><a class="brand" href="./" aria-label="Datum home">Datum</a><nav aria-label="Site"><a href="#explore">Project notes</a><a href="../">Motion Field</a></nav></header>
+  <header class="mast"><a class="brand" href="./" aria-label="Datum home">Datum</a><nav aria-label="Site"><a href="#tools">Tool</a><a href="#model">3D</a><a href="../">All sites</a></nav></header>
   <main id="main" class="study" tabindex="-1">
     <section class="hero" aria-label="Architecture practice"><div class="hero-copy">
   <p class="genre">Architecture practice</p>
@@ -29,12 +30,47 @@
       <div class="selection">
         <div class="choices" role="group" aria-label="Project notes"><button class="choice" type="button" data-pick="0" aria-controls="selection-details" aria-pressed="true"><span>+08.40</span><b>Entry</b></button><button class="choice" type="button" data-pick="1" aria-controls="selection-details" aria-pressed="false"><span>+04.20</span><b>Reading room</b></button><button class="choice" type="button" data-pick="2" aria-controls="selection-details" aria-pressed="false"><span>+00.00</span><b>Sea terrace</b></button></div>
         <div id="selection-details" class="reading" aria-live="polite" aria-atomic="true"><h3 data-detail-title>Arrival at road level</h3><p data-detail-text>A low ceiling narrows the field of view before the first glimpse of the sea.</p></div>
-        
-        
+
+
       </div>
       <figure class="drawing"><canvas data-canvas role="img" aria-label="Building section and marker for the selected floor"></canvas><figcaption>Section A / Coastal Library</figcaption></figure>
     </div>
   </section>
+    <section class="workshop" id="tools" data-workshop tabindex="-1" aria-labelledby="tool-title">
+  <div class="section-head"><h2 id="tool-title">Plan scale calculator</h2><p>Measure a rectangular room on a printed plan to find its actual dimensions and area.</p></div>
+  <div class="workshop-grid">
+    <form aria-labelledby="tool-title"><div class="tool-fields"><label for="tool-length">Length on paper (mm)<input id="tool-length" type="number" name="length" value="84" min="0.1" max="1200" step="0.1" inputmode="decimal" required></label><label for="tool-width">Width on paper (mm)<input id="tool-width" type="number" name="width" value="44" min="0.1" max="1200" step="0.1" inputmode="decimal" required></label><label for="tool-scale">Scale<select id="tool-scale" name="scale"><option value="20">1:20</option><option value="50" selected>1:50</option><option value="100">1:100</option><option value="200">1:200</option></select></label></div>
+      <button class="action" type="submit">Calculate</button>
+      <p class="tool-status" data-result-status role="status"></p>
+    </form>
+    <div class="tool-result">
+
+      <div data-results></div>
+      <button class="quiet-action" type="button" data-download>Download CSV</button>
+    </div>
+  </div>
+</section>
+<section class="model-section" id="model" data-model tabindex="-1" aria-labelledby="model-title">
+  <div class="model-heading"><div><p class="genre">3D model</p><h2 id="model-title">Coastal library massing</h2></div>
+    <a class="quiet-action" href="../assets/models/datum.glb" download>Download GLB</a></div>
+  <div class="model-media">
+    <img data-poster src="../assets/models/datum.webp" width="900" height="563" loading="lazy" alt="Coastal library massing viewed from above and to the side">
+    <div class="model-viewport" id="viewer" data-viewport hidden></div>
+  </div>
+  <div class="model-footer">
+    <button class="action" type="button" data-open-model aria-controls="viewer" aria-expanded="false">Open 3D view</button>
+    <div class="model-controls" data-model-controls aria-label="3D controls" role="group" hidden>
+      <button type="button" data-orbit="left" aria-label="Rotate left">←</button>
+      <button type="button" data-orbit="right" aria-label="Rotate right">→</button>
+      <button type="button" data-orbit="up" aria-label="Tilt up">↑</button>
+      <button type="button" data-orbit="down" aria-label="Tilt down">↓</button>
+      <button type="button" data-orbit="in" aria-label="Zoom in">+</button>
+      <button type="button" data-orbit="out" aria-label="Zoom out">−</button>
+      <button type="button" data-orbit="reset">Reset view</button>
+    </div>
+  </div>
+  <p class="tool-status" data-model-status role="status"></p>
+</section>
   </main>
   <footer class="foot"><span>Motion Field / Architecture practice concept</span><a href="../brasa/">Next study: Brasa</a></footer>
   <script type="application/json" id="study-data">[["+08.40","Entry","Arrival at road level","A low ceiling narrows the field of view before the first glimpse of the sea."],["+04.20","Reading room","Daylight from the north","A continuous desk faces open water, with deep concrete fins to cut glare."],["+00.00","Sea terrace","Shelter beneath the cantilever","The route ends on a sheltered ledge at the upper edge of the rock."]]</script>

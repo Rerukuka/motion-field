@@ -7,9 +7,10 @@
   <link rel="icon" href="../assets/icon.png" type="image/png">
   <link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css">
   <script type="module" src="../assets/motion.js"></script>
+  <script type="module" src="../assets/workshop.js"></script>
 </head><body class="umbra" data-study="umbra" data-pick="0">
   <a class="skip" href="#main">Skip to content</a>
-  <header class="mast"><a class="brand" href="./" aria-label="Umbra home">Umbra</a><nav aria-label="Site"><a href="#explore">Shadow states</a><a href="../">Motion Field</a></nav></header>
+  <header class="mast"><a class="brand" href="./" aria-label="Umbra home">Umbra</a><nav aria-label="Site"><a href="#tools">Tool</a><a href="#model">3D</a><a href="../">All sites</a></nav></header>
   <main id="main" class="study" tabindex="-1">
     <section class="hero" aria-label="Interactive planetarium"><div class="hero-copy">
   <p class="genre">Interactive planetarium</p>
@@ -24,12 +25,47 @@
       <div class="selection">
         <div class="choices" role="group" aria-label="Shadow states"><button class="choice" type="button" data-pick="0" aria-controls="selection-details" aria-pressed="true"><span>01</span><b>Penumbral</b></button><button class="choice" type="button" data-pick="1" aria-controls="selection-details" aria-pressed="false"><span>02</span><b>Partial</b></button><button class="choice" type="button" data-pick="2" aria-controls="selection-details" aria-pressed="false"><span>03</span><b>Total</b></button></div>
         <div id="selection-details" class="reading" aria-live="polite" aria-atomic="true"><h3 data-detail-title>Earth blocks part of the sunlight</h3><p data-detail-text>The Moon dims slightly as it crosses the penumbra, the outer part of Earth’s shadow.</p></div>
-        
-        
+
+
       </div>
-      
+
     </div>
   </section>
+    <section class="workshop" id="tools" data-workshop tabindex="-1" aria-labelledby="tool-title">
+  <div class="section-head"><h2 id="tool-title">Shadow coverage calculator</h2><p>Change the center-to-center offset in a simplified cross-section. The tool estimates the part of the lunar disk in each shadow.</p></div>
+  <div class="workshop-grid">
+    <form aria-labelledby="tool-title"><div class="tool-fields"><label for="tool-offset">Offset (% of model range)<input id="tool-offset" type="number" name="offset" value="35" min="0" max="100" step="1" inputmode="decimal" required></label></div>
+      <button class="action" type="submit">Calculate</button>
+      <p class="tool-status" data-result-status role="status"></p>
+    </form>
+    <div class="tool-result">
+
+      <div data-results></div>
+      <button class="quiet-action" type="button" data-download>Download CSV</button>
+    </div>
+  </div>
+</section>
+<section class="model-section" id="model" data-model tabindex="-1" aria-labelledby="model-title">
+  <div class="model-heading"><div><p class="genre">3D model</p><h2 id="model-title">Sun, Earth and Moon</h2></div>
+    <a class="quiet-action" href="../assets/models/umbra.glb" download>Download GLB</a></div>
+  <div class="model-media">
+    <img data-poster src="../assets/models/umbra.webp" width="900" height="563" loading="lazy" alt="Sun, Earth and Moon viewed from above and to the side">
+    <div class="model-viewport" id="viewer" data-viewport hidden></div>
+  </div>
+  <div class="model-footer">
+    <button class="action" type="button" data-open-model aria-controls="viewer" aria-expanded="false">Open 3D view</button>
+    <div class="model-controls" data-model-controls aria-label="3D controls" role="group" hidden>
+      <button type="button" data-orbit="left" aria-label="Rotate left">←</button>
+      <button type="button" data-orbit="right" aria-label="Rotate right">→</button>
+      <button type="button" data-orbit="up" aria-label="Tilt up">↑</button>
+      <button type="button" data-orbit="down" aria-label="Tilt down">↓</button>
+      <button type="button" data-orbit="in" aria-label="Zoom in">+</button>
+      <button type="button" data-orbit="out" aria-label="Zoom out">−</button>
+      <button type="button" data-orbit="reset">Reset view</button>
+    </div>
+  </div>
+  <p class="tool-status" data-model-status role="status"></p>
+</section>
   </main>
   <footer class="foot"><span>Motion Field / Interactive planetarium concept</span><a href="../intertidal/">Next study: Intertidal</a></footer>
   <script type="application/json" id="study-data">[["01","Penumbral","Earth blocks part of the sunlight","The Moon dims slightly as it crosses the penumbra, the outer part of Earth’s shadow."],["02","Partial","The umbra crosses the lunar disk","A dark edge moves across the Moon as part of it enters the umbra."],["03","Total","The whole Moon is in the umbra","Sunlight filtered through Earth’s atmosphere gives the Moon a copper cast."]]</script>
