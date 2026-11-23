@@ -15,9 +15,26 @@ Ten original concept websites, each with a separate route and a motion treatment
 | [Intertidal](https://rerukuka.github.io/motion-field/intertidal/) | An interactive cross-section with a movable waterline |
 | [Offcut](https://rerukuka.github.io/motion-field/offcut/) | The issue’s three covers move through a stack |
 
+## Tools and models
+
+Each site includes a practical tool under **Tool** and an original model under **3D**. Settings stay in the browser. The calculators can export CSV, and Formwerk copies stylesheet declarations. A model can be rotated and zoomed with its control buttons, the keyboard, or by dragging. Each model also has a preview and a downloadable GLB.
+
+| Study | Tool |
+| --- | --- |
+| Kiln 1260 | Calculate the dimensions to make before clay shrinkage |
+| Datum | Convert lengths on a scaled drawing into dimensions and rectangular area |
+| Brasa | Plan an order and split the sample menu estimate per guest |
+| The Quiet Relay | Edit the running time of each title scene and export production cues |
+| Scree | Estimate moving time from distance, pace and climbing allowance |
+| Formwerk | Preview a type setting and copy its CSS |
+| Night Dial | Set volume and choose the original BPM or a custom tempo |
+| Umbra | Calculate percent coverage in a simplified eclipse cross-section |
+| Intertidal | Interpolate a crossing time between supplied low and high tides |
+| Offcut | Arrange pages on the front and back of each folded booklet sheet |
+
 ## Source and preview
 
-`source/studies.mjs` contains study copy, `source/build.mjs` renders the HTML, and `source/art.js` implements the original canvas illustrations. `dist/` contains the deployable static files and locally served fonts and images. No runtime packages or external APIs are required.
+`source/studies.mjs` contains study copy, `source/build.mjs` renders the HTML, and `source/art.js` implements the original canvas illustrations. Calculations are in `source/utilities.js` and model geometry is in `source/model-blueprints.js`. `dist/` contains the deployable site, local media, 3D assets and Three.js r187 under its MIT license. The renderer loads only when a visitor opens a model. The sites require no external APIs.
 
 ```sh
 node source/build.mjs

@@ -271,6 +271,58 @@ figcaption{padding-top:10px}
 @keyframes menu-surface{from{opacity:.45;transform:translateX(12px) rotate(-2deg)}to{opacity:1;transform:translateX(0) rotate(-2deg)}}
 .offcut .sheet{backface-visibility:hidden}
 
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.workshop,.model-section{padding:clamp(40px,6vw,88px) var(--gutter);border-top:1px solid var(--rule);outline-offset:-4px}
+.workshop{background:color-mix(in srgb,var(--paper),var(--ink) 4%)}
+.workshop-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,6vw,88px)}
+.tool-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tool-fields label{display:grid;gap:6px;font-size:.95rem;font-weight:560;align-content:start}
+.tool-fields input,.tool-fields select{width:100%;min-height:48px;padding:8px 12px;background:var(--paper);color:var(--ink);border:1px solid var(--rule);border-radius:0}
+.tool-fields :is(input,select):hover{border-color:var(--ink)}
+.tool-fields input:disabled{opacity:.45}
+.tool-status{min-height:1.5em;margin-top:8px;font-size:.875rem;color:var(--muted)}
+.tool-result{align-self:start;min-width:0;padding:20px;background:var(--paper);border:1px solid var(--rule)}
+.tool-result table{width:100%;border-collapse:collapse;text-align:left;font-variant-numeric:tabular-nums}
+.tool-result thead{color:var(--muted);font-size:.875rem}
+.tool-result :is(td,th){padding:8px 6px;overflow-wrap:anywhere;border-bottom:1px solid var(--rule);vertical-align:top}
+.tool-result tbody th{font-weight:560}
+.tool-result :is(td,th):first-child{padding-left:0}
+.tool-result :is(td,th):last-child{padding-right:0}
+.tool-result [data-results]>p{color:var(--muted);padding-top:8px;font-size:.875rem}
+.tool-result [data-code]{white-space:pre-wrap;overflow-wrap:anywhere;margin:16px 0 0;font:400 .875rem/1.45 var(--mono)}
+.tool-result .quiet-action{margin-top:16px}
+[data-dirty] .tool-result table{color:var(--muted)}
+.quiet-action{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:6px 12px;border:1px solid var(--rule);background:transparent;color:var(--ink);font-weight:550;text-decoration:none;text-align:center}
+.quiet-action:hover{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.quiet-action:disabled{opacity:.5;background:transparent;color:var(--ink);cursor:default}
+.type-sample{margin:0 0 10px;border-bottom:1px solid var(--rule);font-size:var(--sample-size,48px);line-height:1.05;padding:6px 4px 12px;overflow-wrap:anywhere}
+.model-section{--model-paper:#d1beab}
+.datum .model-section{--model-paper:#c1cbc1}
+.brasa .model-section{--model-paper:#ae7566}
+.relay .model-section{--model-paper:#687983}
+.scree .model-section{--model-paper:#c7bc99}
+.formwerk .model-section{--model-paper:#d9df99}
+.night-dial .model-section{--model-paper:#718071}
+.umbra .model-section{--model-paper:#323e51}
+.intertidal .model-section{--model-paper:#b4cfc3}
+.offcut .model-section{--model-paper:#d1b198}
+.model-heading,.model-footer{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+.model-heading{margin-bottom:16px}
+.model-heading .genre{margin:0 0 8px}
+.model-heading h2{font:560 clamp(2.2rem,4.8vw,4.6rem)/.94 var(--display);letter-spacing:-.052em}
+.model-media{display:grid;place-items:center;position:relative;isolation:isolate;overflow:hidden;background:var(--model-paper);border:1px solid var(--rule);width:100%;aspect-ratio:1.9;max-height:560px}
+.model-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.model-viewport{position:absolute;inset:0}
+.model-viewport canvas{width:100%;height:100%;touch-action:pan-y;cursor:grab}
+.model-viewport canvas:active{cursor:grabbing}
+.model-viewport canvas:focus-visible{outline-offset:-4px;outline-color:#111611}
+.model-footer{justify-content:flex-start;align-items:center;margin-top:12px}
+.model-footer .action{margin:0}
+.model-controls{display:flex;gap:8px;flex-wrap:wrap}
+.model-controls[hidden],.model-media [hidden]{display:none}
+.model-controls button{min-height:46px;min-width:46px;padding:4px 9px;border:1px solid var(--rule);background:transparent;font-weight:550}
+.model-controls button:hover{background:var(--ink);color:var(--paper)}
+
 @media(max-width:800px){
   .hero,.kiln .hero,.datum .hero,.brasa .hero,.scree .hero,.formwerk .hero,.night-dial .hero,.umbra .hero,.intertidal .hero,.offcut .hero{grid-template-columns:1fr;gap:24px}
   .brasa .hero-copy,.brasa .cover,.scree .hero-copy,.scree .cover{grid-column:auto;grid-row:auto}
@@ -286,6 +338,7 @@ figcaption{padding-top:10px}
   .section-head,.bench-grid{grid-template-columns:1fr}
   .index-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .index-hero{grid-template-columns:1fr}
+  .workshop-grid{grid-template-columns:1fr}
 }
 @media(max-width:460px){
   .mast nav{gap:12px}
@@ -297,6 +350,9 @@ figcaption{padding-top:10px}
   .relay .cover figcaption{max-width:19ch;text-align:right}
   .choice{grid-template-columns:80px 1fr}
   .umbra .workbench .choice,.intertidal .workbench .choice{padding-inline:8px;font-size:.875rem}
+  .tool-result{padding:12px}
+  .model-media{aspect-ratio:1.35}
+  .model-controls{gap:6px}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}

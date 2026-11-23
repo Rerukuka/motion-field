@@ -7,9 +7,10 @@
   <link rel="icon" href="../assets/icon.png" type="image/png">
   <link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css">
   <script type="module" src="../assets/motion.js"></script>
+  <script type="module" src="../assets/workshop.js"></script>
 </head><body class="formwerk" data-study="formwerk" data-pick="0">
   <a class="skip" href="#main">Skip to content</a>
-  <header class="mast"><a class="brand" href="./" aria-label="Formwerk home">Formwerk</a><nav aria-label="Site"><a href="#explore">About the specimen</a><a href="../">Motion Field</a></nav></header>
+  <header class="mast"><a class="brand" href="./" aria-label="Formwerk home">Formwerk</a><nav aria-label="Site"><a href="#tools">Tool</a><a href="#model">3D</a><a href="../">All sites</a></nav></header>
   <main id="main" class="study" tabindex="-1">
     <section class="hero" aria-label="Type specimen"><div class="hero-copy">
   <p class="genre">Type specimen</p>
@@ -27,8 +28,8 @@
       <div class="selection">
         <div class="choices" role="group" aria-label="About the specimen"><button class="choice" type="button" data-pick="0" aria-controls="selection-details" aria-pressed="true"><span>240</span><b>Light</b></button><button class="choice" type="button" data-pick="1" aria-controls="selection-details" aria-pressed="false"><span>560</span><b>Text</b></button><button class="choice" type="button" data-pick="2" aria-controls="selection-details" aria-pressed="false"><span>880</span><b>Heavy</b></button></div>
         <div id="selection-details" class="reading" aria-live="polite" aria-atomic="true"><h3 data-detail-title>Weight 240</h3><p data-detail-text>At a light weight, the counters sound almost as loud as the strokes.</p></div>
-        
-        
+
+
       </div>
       <div class="input-group">
     <label for="word">Specimen text</label>
@@ -40,6 +41,41 @@
   </div>
     </div>
   </section>
+    <section class="workshop" id="tools" data-workshop tabindex="-1" aria-labelledby="tool-title">
+  <div class="section-head"><h2 id="tool-title">Type CSS generator</h2><p>Adjust Geist’s weight, size and tracking, preview your specimen and copy the CSS.</p></div>
+  <div class="workshop-grid">
+    <form aria-labelledby="tool-title"><div class="tool-fields"><label for="tool-weight">Weight<input id="tool-weight" type="number" name="weight" value="560" min="100" max="900" step="1" inputmode="decimal" required></label><label for="tool-size">Size (px)<input id="tool-size" type="number" name="size" value="48" min="8" max="200" step="1" inputmode="decimal" required></label><label for="tool-tracking">Letter spacing (px)<input id="tool-tracking" type="number" name="tracking" value="-1.5" min="-8" max="20" step="0.1" inputmode="decimal" required></label></div>
+      <button class="action" type="submit">Preview settings</button>
+      <p class="tool-status" data-result-status role="status"></p>
+    </form>
+    <div class="tool-result">
+      <div class="type-sample" data-type-sample></div>
+      <div data-results></div>
+      <pre data-code></pre><button class="quiet-action" type="button" data-copy>Copy CSS</button>
+    </div>
+  </div>
+</section>
+<section class="model-section" id="model" data-model tabindex="-1" aria-labelledby="model-title">
+  <div class="model-heading"><div><p class="genre">3D model</p><h2 id="model-title">Extruded lettering</h2></div>
+    <a class="quiet-action" href="../assets/models/formwerk.glb" download>Download GLB</a></div>
+  <div class="model-media">
+    <img data-poster src="../assets/models/formwerk.webp" width="900" height="563" loading="lazy" alt="Extruded lettering viewed from above and to the side">
+    <div class="model-viewport" id="viewer" data-viewport hidden></div>
+  </div>
+  <div class="model-footer">
+    <button class="action" type="button" data-open-model aria-controls="viewer" aria-expanded="false">Open 3D view</button>
+    <div class="model-controls" data-model-controls aria-label="3D controls" role="group" hidden>
+      <button type="button" data-orbit="left" aria-label="Rotate left">←</button>
+      <button type="button" data-orbit="right" aria-label="Rotate right">→</button>
+      <button type="button" data-orbit="up" aria-label="Tilt up">↑</button>
+      <button type="button" data-orbit="down" aria-label="Tilt down">↓</button>
+      <button type="button" data-orbit="in" aria-label="Zoom in">+</button>
+      <button type="button" data-orbit="out" aria-label="Zoom out">−</button>
+      <button type="button" data-orbit="reset">Reset view</button>
+    </div>
+  </div>
+  <p class="tool-status" data-model-status role="status"></p>
+</section>
   </main>
   <footer class="foot"><span>Motion Field / Type specimen concept</span><a href="../night-dial/">Next study: Night Dial</a></footer>
   <script type="application/json" id="study-data">[["240","Light","Weight 240","At a light weight, the counters sound almost as loud as the strokes."],["560","Text","Weight 560","A mid-weight gives the word a full rhythm without closing its counters."],["880","Heavy","Weight 880","At the heavy extreme, narrow gaps between letters become part of the drawing."]]</script>

@@ -7,9 +7,10 @@
   <link rel="icon" href="../assets/icon.png" type="image/png">
   <link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css">
   <script type="module" src="../assets/motion.js"></script>
+  <script type="module" src="../assets/workshop.js"></script>
 </head><body class="offcut" data-study="offcut" data-pick="0">
   <a class="skip" href="#main">Skip to content</a>
-  <header class="mast"><a class="brand" href="./" aria-label="Offcut home">Offcut</a><nav aria-label="Site"><a href="#explore">Contents</a><a href="../">Motion Field</a></nav></header>
+  <header class="mast"><a class="brand" href="./" aria-label="Offcut home">Offcut</a><nav aria-label="Site"><a href="#tools">Tool</a><a href="#model">3D</a><a href="../">All sites</a></nav></header>
   <main id="main" class="study" tabindex="-1">
     <section class="hero" aria-label="Independent print journal"><div class="hero-copy">
   <p class="genre">Independent print journal</p>
@@ -27,8 +28,8 @@
       <div class="selection">
         <div class="choices" role="group" aria-label="Contents"><button class="choice" type="button" data-pick="0" aria-controls="selection-details" aria-pressed="true"><span>P. 04</span><b>Misregister</b></button><button class="choice" type="button" data-pick="1" aria-controls="selection-details" aria-pressed="false"><span>P. 16</span><b>The fold</b></button><button class="choice" type="button" data-pick="2" aria-controls="selection-details" aria-pressed="false"><span>P. 28</span><b>Trim waste</b></button></div>
         <div id="selection-details" class="reading" aria-live="polite" aria-atomic="true"><h3 data-detail-title>Two inks, one loose edge</h3><p data-detail-text>Shift a single ink a little and a flat shape becomes two. A note on using print errors as a drawing tool.</p></div>
-        
-        
+
+
       </div>
       <div class="paper-stack" aria-hidden="true">
     <div class="sheet" data-cover="0"><small>Offcut / Misregister</small><b class="print-mark misprint"></b><span>A slight shift / 04</span></div>
@@ -37,6 +38,41 @@
   </div>
     </div>
   </section>
+    <section class="workshop" id="tools" data-workshop tabindex="-1" aria-labelledby="tool-title">
+  <div class="section-head"><h2 id="tool-title">Booklet imposition planner</h2><p>Plan saddle-stitch printing. Enter the number of pages and get the left and right positions on both sides of every sheet.</p></div>
+  <div class="workshop-grid">
+    <form aria-labelledby="tool-title"><div class="tool-fields"><label for="tool-pages">Pages, including covers<input id="tool-pages" type="number" name="pages" value="14" min="1" max="120" step="1" inputmode="decimal" required></label><label for="tool-binding">Reading direction<select id="tool-binding" name="binding"><option value="ltr" selected>Left to right</option><option value="rtl">Right to left</option></select></label></div>
+      <button class="action" type="submit">Calculate</button>
+      <p class="tool-status" data-result-status role="status"></p>
+    </form>
+    <div class="tool-result">
+
+      <div data-results></div>
+      <button class="quiet-action" type="button" data-download>Download CSV</button>
+    </div>
+  </div>
+</section>
+<section class="model-section" id="model" data-model tabindex="-1" aria-labelledby="model-title">
+  <div class="model-heading"><div><p class="genre">3D model</p><h2 id="model-title">Folded print signature</h2></div>
+    <a class="quiet-action" href="../assets/models/offcut.glb" download>Download GLB</a></div>
+  <div class="model-media">
+    <img data-poster src="../assets/models/offcut.webp" width="900" height="563" loading="lazy" alt="Folded print signature viewed from above and to the side">
+    <div class="model-viewport" id="viewer" data-viewport hidden></div>
+  </div>
+  <div class="model-footer">
+    <button class="action" type="button" data-open-model aria-controls="viewer" aria-expanded="false">Open 3D view</button>
+    <div class="model-controls" data-model-controls aria-label="3D controls" role="group" hidden>
+      <button type="button" data-orbit="left" aria-label="Rotate left">←</button>
+      <button type="button" data-orbit="right" aria-label="Rotate right">→</button>
+      <button type="button" data-orbit="up" aria-label="Tilt up">↑</button>
+      <button type="button" data-orbit="down" aria-label="Tilt down">↓</button>
+      <button type="button" data-orbit="in" aria-label="Zoom in">+</button>
+      <button type="button" data-orbit="out" aria-label="Zoom out">−</button>
+      <button type="button" data-orbit="reset">Reset view</button>
+    </div>
+  </div>
+  <p class="tool-status" data-model-status role="status"></p>
+</section>
   </main>
   <footer class="foot"><span>Motion Field / Independent print journal concept</span><a href="../kiln/">Next study: Kiln 1260</a></footer>
   <script type="application/json" id="study-data">[["P. 04","Misregister","Two inks, one loose edge","Shift a single ink a little and a flat shape becomes two. A note on using print errors as a drawing tool."],["P. 16","The fold","A page with a hidden face","Fold a sheet before the second impression. The center crease becomes the edge of a new composition."],["P. 28","Trim waste","What stays outside the cut","Crop marks show where a page will stop. This issue keeps them in sight as part of the composition."]]</script>

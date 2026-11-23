@@ -1,10 +1,11 @@
 import { cp, mkdir, writeFile } from 'node:fs/promises';
 import { studies } from './studies.mjs';
+import { tools } from './utilities.js';
 
 const out = new URL('../dist/', import.meta.url);
 const source = new URL('./', import.meta.url);
 await mkdir(new URL('assets/', out), { recursive: true });
-for (const file of ['style.css', 'motion.js', 'art.js']) {
+for (const file of ['style.css', 'motion.js', 'art.js', 'utilities.js', 'workshop.js', 'model-blueprints.js', 'viewer.js']) {
   await cp(new URL(file, source), new URL('assets/' + file, out));
 }
 await writeFile(new URL('.nojekyll', out), '');
@@ -35,7 +36,7 @@ const art = {
   relay: (s) => `<div class="film-frame" data-shot="0">
     ${cover(s)}
     <div class="film-card" aria-hidden="true"><i></i><strong>Carrier lost</strong></div>
-    <div class="film-meter" aria-hidden="true"><span data-clock>00:00</span><div><b></b></div><span>00:09</span></div>
+    <div class="film-meter" aria-hidden="true"><span data-clock>00:00</span><div><b></b></div><span data-runtime>00:09</span></div>
   </div>`,
   scree: (s) => cover(s, 'scree-photo'),
   formwerk: () => `<figure class="type-stage">
@@ -45,7 +46,7 @@ const art = {
   </figure>`,
   'night-dial': () => `<div class="turntable"><div class="tonearm"></div><div class="record" aria-hidden="true">
     <div class="record-label"><b>ND</b><span data-record-side>SIDE A</span></div>
-  </div><p>Original loops / 33⅓</p></div>`,
+  </div><p>Original loops / <span data-current-tempo>84 BPM</span></p></div>`,
   umbra: () => `<figure class="sky-stage"><canvas data-canvas role="img" aria-label="Diagram of the Moon passing through the shadow cast by Earth"></canvas>
     <figcaption><span>Earth’s shadow</span><span>Diagram to illustrate alignment</span></figcaption></figure>`,
   intertidal: () => `<figure class="shore-stage"><canvas data-canvas role="img" aria-label="Cross-section of three habitats on a rocky shore with a movable waterline"></canvas>
@@ -90,6 +91,56 @@ function workbench(s) {
   </section>`;
 }
 
+function workshop(s) {
+  const t=tools[s.id];
+  const controls=Object.entries(t.fields).map(([name,field])=>{
+    const id='tool-'+name;
+    let input;
+    if(field.type==='select') {
+      input=`<select id="${id}" name="${name}">${field.choices.map(([value,text])=>`<option value="${value}"${value===field.value?' selected':''}>${escape(text)}</option>`).join('')}</select>`;
+    } else {
+      const limits=field.type==='number'?` min="${field.min}" max="${field.max}" step="${field.step}" inputmode="decimal"`:'';
+      input=`<input id="${id}" type="${field.type}" name="${name}" value="${field.value}"${limits} required>`;
+    }
+    return `<label for="${id}">${escape(field.label)}${input}</label>`;
+  }).join('');
+  return `<section class="workshop" id="tools" data-workshop tabindex="-1" aria-labelledby="tool-title">
+  <div class="section-head"><h2 id="tool-title">${escape(t.title)}</h2><p>${escape(t.description)}</p></div>
+  <div class="workshop-grid">
+    <form aria-labelledby="tool-title"><div class="tool-fields">${controls}</div>
+      <button class="action" type="submit">${t.submit||'Calculate'}</button>
+      <p class="tool-status" data-result-status role="status"></p>
+    </form>
+    <div class="tool-result">
+      ${s.id==='formwerk'?'<div class="type-sample" data-type-sample></div>':''}
+      <div data-results></div>
+      ${s.id==='formwerk'?'<pre data-code></pre><button class="quiet-action" type="button" data-copy>Copy CSS</button>':'<button class="quiet-action" type="button" data-download>Download CSV</button>'}
+    </div>
+  </div>
+</section>
+<section class="model-section" id="model" data-model tabindex="-1" aria-labelledby="model-title">
+  <div class="model-heading"><div><p class="genre">3D model</p><h2 id="model-title">${escape(t.model)}</h2></div>
+    <a class="quiet-action" href="../assets/models/${s.id}.glb" download>Download GLB</a></div>
+  <div class="model-media">
+    <img data-poster src="../assets/models/${s.id}.webp" width="900" height="563" loading="lazy" alt="${escape(t.model)} viewed from above and to the side">
+    <div class="model-viewport" id="viewer" data-viewport hidden></div>
+  </div>
+  <div class="model-footer">
+    <button class="action" type="button" data-open-model aria-controls="viewer" aria-expanded="false">Open 3D view</button>
+    <div class="model-controls" data-model-controls aria-label="3D controls" role="group" hidden>
+      <button type="button" data-orbit="left" aria-label="Rotate left">←</button>
+      <button type="button" data-orbit="right" aria-label="Rotate right">→</button>
+      <button type="button" data-orbit="up" aria-label="Tilt up">↑</button>
+      <button type="button" data-orbit="down" aria-label="Tilt down">↓</button>
+      <button type="button" data-orbit="in" aria-label="Zoom in">+</button>
+      <button type="button" data-orbit="out" aria-label="Zoom out">−</button>
+      <button type="button" data-orbit="reset">Reset view</button>
+    </div>
+  </div>
+  <p class="tool-status" data-model-status role="status"></p>
+</section>`;
+}
+
 function page(s) {
   const i = studies.indexOf(s);
   const next = studies[(i + 1) % studies.length];
@@ -102,12 +153,14 @@ function page(s) {
   <link rel="icon" href="../assets/icon.png" type="image/png">
   <link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css">
   <script type="module" src="../assets/motion.js"></script>
+  <script type="module" src="../assets/workshop.js"></script>
 </head><body class="${s.id}" data-study="${s.id}" data-pick="0">
   <a class="skip" href="#main">Skip to content</a>
-  <header class="mast"><a class="brand" href="./" aria-label="${escape(s.name)} home">${escape(s.name)}</a><nav aria-label="Site"><a href="#explore">${s.nav}</a><a href="../">Motion Field</a></nav></header>
+  <header class="mast"><a class="brand" href="./" aria-label="${escape(s.name)} home">${escape(s.name)}</a><nav aria-label="Site"><a href="#tools">Tool</a><a href="#model">3D</a><a href="../">All sites</a></nav></header>
   <main id="main" class="study" tabindex="-1">
     <section class="hero" aria-label="${escape(s.genre)}">${intro(s)}${art[s.id](s)}${['umbra','intertidal'].includes(s.id) ? diagrams[s.id] : ''}</section>
     ${workbench(s)}
+    ${workshop(s)}
   </main>
   <footer class="foot"><span>Motion Field / ${s.genre} concept</span><a href="../${next.id}/">Next study: ${escape(next.name)}</a></footer>
   <script type="application/json" id="study-data">${JSON.stringify(s.entries).replace(/</g, '\\u003c')}</script>
@@ -115,7 +168,7 @@ function page(s) {
 }
 for (const s of studies) {
   await mkdir(new URL(s.id + '/', out), { recursive: true });
-  await writeFile(new URL(s.id + '/index.html', out), page(s));
+  await writeFile(new URL(s.id + '/index.html', out), page(s).replace(/[ \t]+$/gm,''));
 }
 
 await writeFile(new URL('index.html', out), `<!doctype html>
@@ -131,7 +184,7 @@ await writeFile(new URL('index.html', out), `<!doctype html>
 <section class="index-grid" id="collection" aria-label="Ten studies">
 ${studies.map((s) => `<a class="index-card theme-${s.id}" href="${s.id}/">
   <div class="tile" aria-hidden="true">${s.alt ? `<img src="assets/${s.id}-640.webp" alt="" width="640" height="427" loading="lazy">` : `<span class="miniature">${({formwerk:'Aa','night-dial':'ND',umbra:'',intertidal:'',offcut:'Offcut'})[s.id]}</span>`}</div>
-  <div class="index-key"><h2>${escape(s.name)}</h2><span>${s.genre}</span></div><p>${s.motion}</p></a>`).join('')}
+  <div class="index-key"><h2>${escape(s.name)}</h2><span>${s.genre}</span></div><p>${escape(tools[s.id].title)} · 3D model</p></a>`).join('')}
 </section></main><footer class="foot"><span>Motion Field / Web design &amp; creative coding</span><a href="https://github.com/Rerukuka/motion-field">Source on GitHub</a></footer>
 </body></html>`);
 

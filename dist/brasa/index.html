@@ -7,9 +7,10 @@
   <link rel="icon" href="../assets/icon.png" type="image/png">
   <link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css">
   <script type="module" src="../assets/motion.js"></script>
+  <script type="module" src="../assets/workshop.js"></script>
 </head><body class="brasa" data-study="brasa" data-pick="0">
   <a class="skip" href="#main">Skip to content</a>
-  <header class="mast"><a class="brand" href="./" aria-label="Brasa home">Brasa</a><nav aria-label="Site"><a href="#explore">Kitchen</a><a href="../">Motion Field</a></nav></header>
+  <header class="mast"><a class="brand" href="./" aria-label="Brasa home">Brasa</a><nav aria-label="Site"><a href="#tools">Tool</a><a href="#model">3D</a><a href="../">All sites</a></nav></header>
   <main id="main" class="study" tabindex="-1">
     <section class="hero" aria-label="Small plates restaurant"><div class="hero-copy">
   <p class="genre">Small plates restaurant</p>
@@ -29,12 +30,47 @@
       <div class="selection">
         <div class="choices" role="group" aria-label="Kitchen"><button class="choice" type="button" data-pick="0" aria-controls="selection-details" aria-pressed="true"><span>€8</span><b>From the garden</b></button><button class="choice" type="button" data-pick="1" aria-controls="selection-details" aria-pressed="false"><span>€17</span><b>From the sea</b></button><button class="choice" type="button" data-pick="2" aria-controls="selection-details" aria-pressed="false"><span>€7</span><b>Something sweet</b></button></div>
         <div id="selection-details" class="reading" aria-live="polite" aria-atomic="true"><h3 data-detail-title>Pimientos a la brasa</h3><p data-detail-text>Blistered peppers, smoked salt and a spoonful of green herb oil.</p></div>
-        
-        
+
+
       </div>
       <div class="bench-print" aria-hidden="true"><span data-print-tag>€8</span><b data-print-title>Pimientos a la brasa</b></div>
     </div>
   </section>
+    <section class="workshop" id="tools" data-workshop tabindex="-1" aria-labelledby="tool-title">
+  <div class="section-head"><h2 id="tool-title">Table order planner</h2><p>Build an order from the sample menu and split the estimated bill by the number of guests.</p></div>
+  <div class="workshop-grid">
+    <form aria-labelledby="tool-title"><div class="tool-fields"><label for="tool-peppers">Blistered peppers · €8<input id="tool-peppers" type="number" name="peppers" value="2" min="0" max="99" step="1" inputmode="decimal" required></label><label for="tool-sardines">Grilled sardines · €17<input id="tool-sardines" type="number" name="sardines" value="2" min="0" max="99" step="1" inputmode="decimal" required></label><label for="tool-flan">Burnt milk flan · €7<input id="tool-flan" type="number" name="flan" value="1" min="0" max="99" step="1" inputmode="decimal" required></label><label for="tool-guests">Guests<input id="tool-guests" type="number" name="guests" value="2" min="1" max="99" step="1" inputmode="decimal" required></label></div>
+      <button class="action" type="submit">Calculate</button>
+      <p class="tool-status" data-result-status role="status"></p>
+    </form>
+    <div class="tool-result">
+
+      <div data-results></div>
+      <button class="quiet-action" type="button" data-download>Download CSV</button>
+    </div>
+  </div>
+</section>
+<section class="model-section" id="model" data-model tabindex="-1" aria-labelledby="model-title">
+  <div class="model-heading"><div><p class="genre">3D model</p><h2 id="model-title">The ember grill</h2></div>
+    <a class="quiet-action" href="../assets/models/brasa.glb" download>Download GLB</a></div>
+  <div class="model-media">
+    <img data-poster src="../assets/models/brasa.webp" width="900" height="563" loading="lazy" alt="The ember grill viewed from above and to the side">
+    <div class="model-viewport" id="viewer" data-viewport hidden></div>
+  </div>
+  <div class="model-footer">
+    <button class="action" type="button" data-open-model aria-controls="viewer" aria-expanded="false">Open 3D view</button>
+    <div class="model-controls" data-model-controls aria-label="3D controls" role="group" hidden>
+      <button type="button" data-orbit="left" aria-label="Rotate left">←</button>
+      <button type="button" data-orbit="right" aria-label="Rotate right">→</button>
+      <button type="button" data-orbit="up" aria-label="Tilt up">↑</button>
+      <button type="button" data-orbit="down" aria-label="Tilt down">↓</button>
+      <button type="button" data-orbit="in" aria-label="Zoom in">+</button>
+      <button type="button" data-orbit="out" aria-label="Zoom out">−</button>
+      <button type="button" data-orbit="reset">Reset view</button>
+    </div>
+  </div>
+  <p class="tool-status" data-model-status role="status"></p>
+</section>
   </main>
   <footer class="foot"><span>Motion Field / Small plates restaurant concept</span><a href="../relay/">Next study: The Quiet Relay</a></footer>
   <script type="application/json" id="study-data">[["€8","From the garden","Pimientos a la brasa","Blistered peppers, smoked salt and a spoonful of green herb oil."],["€17","From the sea","Sardines over coals","Whole sardines, lemon and warm bread rubbed with garlic."],["€7","Something sweet","Burnt milk flan","Soft custard under a thin cap of near-black caramel."]]</script>

@@ -1,4 +1,5 @@
 import { mountArt } from './art.js';
+import { timecode } from './utilities.js';
 
 const body = document.body;
 const site = body.dataset.study;
@@ -28,7 +29,7 @@ function displaySelection(index) {
   title.textContent = entries[index][2];
   detail.textContent = entries[index][3];
   if (print) {
-    print.querySelector('[data-print-tag]').textContent = entries[index][0];
+    print.querySelector('[data-print-tag]').textContent = site==='relay' ? pickers[index].querySelector('span').textContent : entries[index][0];
     print.querySelector('[data-print-title]').textContent = entries[index][site === 'brasa' ? 2 : 1];
     if (site === 'brasa' && !reduced.matches) {
       print.classList.remove('is-changing');
@@ -79,15 +80,18 @@ if (site === 'relay') {
   const stage = document.querySelector('.film-frame');
   const meter = document.querySelector('.film-meter b');
   const clock = document.querySelector('[data-clock]');
+  const runtime = document.querySelector('[data-runtime]');
   const card = document.querySelector('.film-card strong');
   let elapsed = 0, last = 0, requested = 0, playing = false;
+  let starts=[0,3000,6000], length=9000;
+  const formatMS=ms=>[Math.floor(ms/60000),Math.floor(ms/1000)%60].map(v=>String(v).padStart(2,'0')).join(':');
   const update = () => {
-    const shot = Math.min(2, Math.floor(elapsed / 3000));
+    const shot = elapsed>=starts[2]?2:elapsed>=starts[1]?1:0;
     stage.dataset.shot = shot;
     card.textContent = entries[shot][1];
-    const timecode = '00:0' + Math.min(9,Math.floor(elapsed/1000));
+    const timecode = formatMS(elapsed);
     if (clock.textContent !== timecode) clock.textContent = timecode;
-    meter.style.transform = 'scaleX(' + elapsed/9000 + ')';
+    meter.style.transform = 'scaleX(' + elapsed/length + ')';
   };
   const state = (active, paused = false) => {
     playing = active;
@@ -100,10 +104,10 @@ if (site === 'relay') {
   };
   const tick = (now) => {
     if (!playing) return;
-    elapsed = Math.min(9000,elapsed+now-last);
+    elapsed = Math.min(length,elapsed+now-last);
     last = now;
     update();
-    if (elapsed < 9000) requested=requestAnimationFrame(tick);
+    if (elapsed < length) requested=requestAnimationFrame(tick);
     else { state(false); elapsed=0; }
   };
   film = {
@@ -115,8 +119,16 @@ if (site === 'relay') {
       }
       last=performance.now(); state(true); update(); requested=requestAnimationFrame(tick);
     },
-    seek(index) { elapsed=index*3000; update(); if (!playing) state(false,true); }
+    seek(index) { elapsed=starts[index]; update(); if (!playing) state(false,true); }
   };
+  window.addEventListener('motion-field:relay', ({detail:{durations:[a,b,c]}}) => {
+    cancelAnimationFrame(requested);
+    state(false);
+    starts=[0,a*10,(a+b)*10];length=(a+b+c)*10;
+    pickers.forEach((button,i)=>{button.querySelector('span').textContent=timecode(starts[i]/10);});
+    print.querySelector('[data-print-tag]').textContent=timecode(starts[selected]/10);
+    elapsed=0;runtime.textContent=formatMS(length);update();
+  });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden && playing) { cancelAnimationFrame(requested); state(false,true); }
   });
@@ -127,7 +139,7 @@ const tracks = [
   {bpm:108,root:98, notes:[0,3,null,7,0,10,7,null],type:'triangle'},
   {bpm:66,root:73.42,notes:[0,null,5,null,7,null,12,null],type:'sine'}
 ];
-let audio, master, timer, beat=0, audioOn=false, audioPending=false;
+let audio, master, timer, beat=0, audioOn=false, audioPending=false, tempo, volume=.36;
 function synth(frequency, when, duration, peak, type) {
   const oscillator = audio.createOscillator(), envelope = audio.createGain();
   oscillator.frequency.value=frequency;
@@ -139,7 +151,7 @@ function synth(frequency, when, duration, peak, type) {
   oscillator.start(when); oscillator.stop(when+duration+.01);
 }
 function beatLoop() {
-  const track = tracks[selected], interval = 60/track.bpm, when=audio.currentTime+.015;
+  const track = tracks[selected], interval = 60/(tempo||track.bpm), when=audio.currentTime+.015;
   const note=track.notes[beat%track.notes.length];
   if (beat%2===0) synth(track.root/2,when,interval*.76,.24,'sine');
   if (note!==null) synth(track.root*2**(note/12),when,interval*.92,.15,track.type);
@@ -165,7 +177,7 @@ async function toggleAudio() {
       audio ??= new AudioContext();
       if (!master) { master=audio.createGain(); master.connect(audio.destination); }
       await audio.resume();
-      master.gain.setTargetAtTime(.36,audio.currentTime,.035);
+      master.gain.setTargetAtTime(volume,audio.currentTime,.035);
       audioOn=true; beatLoop();
     }
     error.textContent='';
@@ -194,6 +206,7 @@ pickers.forEach((button,index) => button.addEventListener('click', () => {
   }
   if (site === 'night-dial') {
     beat=0; document.querySelector('[data-record-side]').textContent='SIDE ' + 'ABC'[index];
+    document.querySelector('[data-current-tempo]').textContent=(tempo||tracks[selected].bpm)+' BPM';
     if (audioOn) { clearTimeout(timer); beatLoop(); }
   }
 }));
@@ -220,4 +233,12 @@ playButtons.forEach(button => button.addEventListener('click', () => film ? film
 if (site === 'night-dial') {
   const turntable = document.querySelector('.turntable');
   new IntersectionObserver(([entry]) => turntable.classList.toggle('is-offscreen', !entry.isIntersecting)).observe(turntable);
+  window.addEventListener('motion-field:night-dial', ({detail})=>{
+    tempo=detail.tempo;volume=detail.volume/100;
+    document.querySelector('[data-current-tempo]').textContent=(tempo||tracks[selected].bpm)+' BPM';
+    if(audioOn) {
+      master.gain.setTargetAtTime(volume,audio.currentTime,.035);
+      clearTimeout(timer);beatLoop();
+    }
+  });
 }

@@ -2,3 +2,6 @@
 *.woff2 binary
 *.webp binary
 *.png binary
+*.glb binary
+dist/assets/three.module.min.js -whitespace
+dist/assets/three.core.js -whitespace

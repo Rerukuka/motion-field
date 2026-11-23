@@ -11,3 +11,10 @@ The first version and each of the five revisions were opened in desktop Chrome a
 | 5. Media and motion | Added responsive image sources, avoided duplicate canvas paints, reduced title sequence DOM updates, suspended offscreen record movement, and tuned menu and cover transitions. |
 
 All ten studies passed the checks in each recorded round. These are desktop browser checks with simulated viewport widths, not physical iOS or Android device tests.
+
+## Tools and 3D update
+
+- Calculator unit checks cover all ten tools, including booklet padding and reading direction, a tide interval crossing midnight, title cue precision and input limits. Run them with `node --test tests/utilities.test.mjs`.
+- Browser passes at 1440, 390 and 320 px exercise edited inputs, calculation results, local storage, CSV export, original and custom playback tempos, and title timings in the film player.
+- Each model is checked for a valid downloadable GLB, a decodable preview, visible WebGL output and a measurable camera change. The narrow-browser pass checks zoom, recovery after simulated WebGL context loss and return to the preview.
+- Visual review corrected the model previews’ framing and centered the orbit camera. The accessibility pass checked navigation to the tools, keyboard orbit controls and the 320 px reduced-motion setting.

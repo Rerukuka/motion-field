@@ -39,7 +39,7 @@ export const studies = [
     id: "relay", name: "The Quiet Relay", genre: "Short film", nav: "Scene index", headline: ["The Quiet", "Relay"],
     note: "After the last station on the ridge goes silent, its operator receives a signal from a room she has never entered.",
     caption: "An original science fiction short concept", action: "Play title sequence", second: "Three frames from the ridge",
-    words: "An imagined twelve-minute film set inside a relay station. The original title study runs for nine seconds.",
+    words: "An imagined twelve-minute film set inside a relay station. The title sequence starts at nine seconds. Edit its timing in the cue sheet below.",
     entries: [
       ["00:00", "Carrier lost", "The ridge", "A maintenance light flickers at the only inhabited point in the valley."],
       ["00:03", "Room four", "The station", "The return signal names an extra room, absent from the plan."],
