@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Move the Moon through Earth’s shadow and watch a lunar eclipse take shape.">
+  <meta name="theme-color" content="#12171e">
+  <title>Umbra — Interactive planetarium</title>
+  <link rel="icon" href="../assets/icon.png" type="image/png">
+  <link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css">
+  <script type="module" src="../assets/motion.js"></script>
+</head><body class="umbra" data-study="umbra" data-pick="0">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="mast"><a class="brand" href="./" aria-label="Umbra home">Umbra</a><nav aria-label="Site"><a href="#explore">Shadow states</a><a href="../">Motion Field</a></nav></header>
+  <main id="main" class="study" tabindex="-1">
+    <section class="hero" aria-label="Interactive planetarium"><div class="hero-copy">
+  <p class="genre">Interactive planetarium</p>
+  <h1><span>Inside</span><span>the shadow</span></h1>
+  <p class="lede">Move the Moon through Earth’s shadow and watch a lunar eclipse take shape.</p>
+  <a class="action" href="#progress">Move through the shadow</a>
+</div><figure class="sky-stage"><canvas data-canvas role="img" aria-label="Diagram of the Moon passing through the shadow cast by Earth"></canvas>
+    <figcaption><span>Earth’s shadow</span><span>Diagram to illustrate alignment</span></figcaption></figure><div class="input-group"><label for="progress">Moon position</label><input id="progress" data-dial type="range" min="0" max="100" value="19"><output data-readout for="progress">Penumbral</output></div></section>
+    <section class="workbench" id="explore" tabindex="-1" aria-labelledby="explore-title">
+    <div class="section-head"><h2 id="explore-title">An eclipse in three states</h2><p>Scrub the Moon’s path or pick a state. The drawing simplifies the scale of the Sun, Earth, Moon and their distances.</p></div>
+    <div class="bench-grid">
+      <div class="selection">
+        <div class="choices" role="group" aria-label="Shadow states"><button class="choice" type="button" data-pick="0" aria-controls="selection-details" aria-pressed="true"><span>01</span><b>Penumbral</b></button><button class="choice" type="button" data-pick="1" aria-controls="selection-details" aria-pressed="false"><span>02</span><b>Partial</b></button><button class="choice" type="button" data-pick="2" aria-controls="selection-details" aria-pressed="false"><span>03</span><b>Total</b></button></div>
+        <div id="selection-details" class="reading" aria-live="polite" aria-atomic="true"><h3 data-detail-title>Earth blocks part of the sunlight</h3><p data-detail-text>The Moon dims slightly as it crosses the penumbra, the outer part of Earth’s shadow.</p></div>
+        
+        
+      </div>
+      
+    </div>
+  </section>
+  </main>
+  <footer class="foot"><span>Motion Field / Interactive planetarium concept</span><a href="../intertidal/">Next study: Intertidal</a></footer>
+  <script type="application/json" id="study-data">[["01","Penumbral","Earth blocks part of the sunlight","The Moon dims slightly as it crosses the penumbra, the outer part of Earth’s shadow."],["02","Partial","The umbra crosses the lunar disk","A dark edge moves across the Moon as part of it enters the umbra."],["03","Total","The whole Moon is in the umbra","Sunlight filtered through Earth’s atmosphere gives the Moon a copper cast."]]</script>
+</body></html>

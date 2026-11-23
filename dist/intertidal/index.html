@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore an illustrated shore from the spray line down to the lower pools.">
+  <meta name="theme-color" content="#d7e7dc">
+  <title>Intertidal — Digital field guide</title>
+  <link rel="icon" href="../assets/icon.png" type="image/png">
+  <link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css">
+  <script type="module" src="../assets/motion.js"></script>
+</head><body class="intertidal" data-study="intertidal" data-pick="0">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="mast"><a class="brand" href="./" aria-label="Intertidal home">Intertidal</a><nav aria-label="Site"><a href="#explore">Field notes</a><a href="../">Motion Field</a></nav></header>
+  <main id="main" class="study" tabindex="-1">
+    <section class="hero" aria-label="Digital field guide"><div class="hero-copy">
+  <p class="genre">Digital field guide</p>
+  <h1><span>Between</span><span>two tides</span></h1>
+  <p class="lede">Explore an illustrated shore from the spray line down to the lower pools.</p>
+  <a class="action" href="#progress">Change the waterline</a>
+</div><figure class="shore-stage"><canvas data-canvas role="img" aria-label="Cross-section of three habitats on a rocky shore with a movable waterline"></canvas>
+    <figcaption><span>Rocky coast</span><span>Habitat cross-section</span></figcaption></figure><div class="input-group"><label for="progress">Water level</label><input id="progress" data-dial type="range" min="0" max="100" value="83"><output data-readout for="progress">High tide</output></div></section>
+    <section class="workbench" id="explore" tabindex="-1" aria-labelledby="explore-title">
+    <div class="section-head"><h2 id="explore-title">The shore in bands</h2><p>Waves and tides expose each band for a different length of time. The species here are examples from temperate rocky coasts.</p></div>
+    <div class="bench-grid">
+      <div class="selection">
+        <div class="choices" role="group" aria-label="Field notes"><button class="choice" type="button" data-pick="0" aria-controls="selection-details" aria-pressed="true"><span>Splash</span><b>Upper shore</b></button><button class="choice" type="button" data-pick="1" aria-controls="selection-details" aria-pressed="false"><span>Mid tide</span><b>Middle shore</b></button><button class="choice" type="button" data-pick="2" aria-controls="selection-details" aria-pressed="false"><span>Low tide</span><b>Lower shore</b></button></div>
+        <div id="selection-details" class="reading" aria-live="polite" aria-atomic="true"><h3 data-detail-title>Lichen and periwinkles</h3><p data-detail-text>Splash from breaking waves moistens the rock above the usual high-water line.</p></div>
+        
+        
+      </div>
+      
+    </div>
+  </section>
+  </main>
+  <footer class="foot"><span>Motion Field / Digital field guide concept</span><a href="../offcut/">Next study: Offcut</a></footer>
+  <script type="application/json" id="study-data">[["Splash","Upper shore","Lichen and periwinkles","Splash from breaking waves moistens the rock above the usual high-water line."],["Mid tide","Middle shore","Barnacles and mussels","Shells close between tides, helping these animals retain water until the next flood."],["Low tide","Lower shore","Sea stars and kelp","The lowest pools spend more time submerged and hold water at low tide."]]</script>
+</body></html>
